@@ -1,0 +1,182 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: phi123 dang, vdk@@@, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\EMBEDDED_LINUX\STM32_UART\TEST_STM\UART_STRING.uvprojx
+Project File Date:  07/11/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+assembling startup_stm32f10x_md.s...
+RTE/Device/STM32F103C8/system_stm32f10x.c(64): warning: In file included from...
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(18): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *              - To use or not the peripheral<92>s drivers in application code(i.e. 
+                                               ^
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *                code will be based on direct access to peripheral<92>s registers 
+                                                                    ^
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(26): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *           - Macros to access peripheral<92>s registers hardware
+                                           ^
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+            ^
+RTE/Device/STM32F103C8/system_stm32f10x.c(166): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+__I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+    ^
+4 warnings generated.
+compiling system_stm32f10x.c...
+main.c(1): warning: // comments are not allowed in this language [-Wcomment]
+#include "stm32f10x.h"   // Device header 
+                         ^
+main.c(1): warning: In file included from...
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(18): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *              - To use or not the peripheral<92>s drivers in application code(i.e. 
+                                               ^
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *                code will be based on direct access to peripheral<92>s registers 
+                                                                    ^
+C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include\stm32f10x.h(26): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  *           - Macros to access peripheral<92>s registers hardware
+                                           ^
+main.c(6): warning: no previous extern declaration for non-static variable 'demdodai' [-Wmissing-variable-declarations]
+int demdodai = 0; 
+    ^
+main.c(6): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int demdodai = 0; 
+^
+main.c(8): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void delay(){
+          ^
+           void
+main.c(8): warning: no previous prototype for function 'delay' [-Wmissing-prototypes]
+void delay(){
+     ^
+main.c(8): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void delay(){
+^
+static 
+main.c(14): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+char nhan_1kitu(){
+               ^
+                void
+main.c(16): warning: implicit conversion loses integer precision: 'volatile uint16_t' (aka 'volatile unsigned short') to 'char' [-Wimplicit-int-conversion]
+    char mot_kitu = USART1->DR;
+         ~~~~~~~~   ~~~~~~~~^~
+main.c(16): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+    char mot_kitu = USART1->DR;
+         ^
+main.c(14): warning: no previous prototype for function 'nhan_1kitu' [-Wmissing-prototypes]
+char nhan_1kitu(){
+     ^
+main.c(14): note: declare 'static' if the function is not intended to be used outside of this translation unit
+char nhan_1kitu(){
+^
+static 
+main.c(19): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void nhan_1chuoi(){
+                ^
+                 void
+main.c(19): warning: no previous prototype for function 'nhan_1chuoi' [-Wmissing-prototypes]
+void nhan_1chuoi(){
+     ^
+main.c(19): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void nhan_1chuoi(){
+^
+static 
+main.c(24): warning: no previous prototype for function 'gui_1kitu' [-Wmissing-prototypes]
+void gui_1kitu(char data){
+     ^
+main.c(24): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void gui_1kitu(char data){
+^
+static 
+main.c(29): warning: no previous prototype for function 'gui_1chuoi' [-Wmissing-prototypes]
+void gui_1chuoi(char *a){
+     ^
+main.c(29): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void gui_1chuoi(char *a){
+^
+static 
+main.c(36): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int main(){
+        ^
+         void
+main.c(56): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                                GPIOC->ODR &= ~0x2000;
+                                           ~~ ^~~~~~~
+main.c(63): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                                GPIOC->ODR &= ~0x2000;
+                                           ~~ ^~~~~~~
+main.c(64): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        memset(chuoi, 0, demdodai);
+        ~~~~~~           ^~~~~~~~
+main.c(73): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+main.c(5): warning: no previous extern declaration for non-static variable 'chuoi' [-Wmissing-variable-declarations]
+char chuoi[max_kitu];
+     ^
+main.c(5): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+char chuoi[max_kitu];
+^
+21 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=1530 RO-data=266 RW-data=0 ZI-data=1736  
+FromELF: creating hex file...
+".\Objects\UART_STRING.axf" - 0 Error(s), 25 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/STM32F103C8
+  ./RTE/_Target_1
+  C:/Users/nam/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/nam/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Include file:  RTE_Driver/Config/RTE_Device.h
+      Source file:   Device/Source/ARM/startup_stm32f10x_md.s
+      Source file:   Device/Source/ARM/STM32F1xx_OPT.s
+      Source file:   Device/Source/system_stm32f10x.c
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
