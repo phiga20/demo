@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\I2C.obj" 
+TO ".\Objects\I2C_8051" 
+PRINT(".\Listings\I2C_8051.m51")

@@ -1,0 +1,159 @@
+C51 COMPILER V9.60.7.0   I2C                                                               08/07/2024 02:35:16 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE I2C
+OBJECT MODULE PLACED IN .\Objects\I2C.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE I2C.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\I2C.l
+                    -st) TABS(2) OBJECT(.\Objects\I2C.obj)
+
+line level    source
+
+   1          #include<stdio.h>
+   2          #include <REGX51.H>
+   3          #include "I2C.h"
+   4          unsigned char address_slave;
+   5          sbit SCL=P0^6;
+   6          sbit SDA=P0^7;
+   7          void start_i2c(){
+   8   1        SDA = 1;
+   9   1        SCL = 1;
+  10   1        SDA = 0;
+  11   1        SCL = 0;
+  12   1      }
+  13          void stop_i2c(){
+  14   1        SCL = 0;
+  15   1        SDA = 0;
+  16   1        SCL = 1;
+  17   1        SDA = 1;
+  18   1      }
+  19          void ack(){
+  20   1        SCL = 0;
+  21   1        SDA = 1;
+  22   1        SCL = 1;
+  23   1        while(SDA);
+  24   1      }
+  25          void add_slave(unsigned char address){
+  26   1        address_slave = address;
+  27   1      }
+  28          void delay_1ms(int time){
+  29   1          while(time > 0){
+  30   2              TMOD = 0x01;
+  31   2              TH0 = 0xFC;
+  32   2              TL0 = 0x66;
+  33   2              TR0 = 1;
+  34   2              while(TF0 == 0){
+  35   3              }
+  36   2              TF0 = 0;
+  37   2              TR0 = 0;
+  38   2              time--;
+  39   2          }
+  40   1      }
+  41          void write_i2c(unsigned char dat){
+  42   1        int i;
+  43   1        for(i=0;i<8;i++){
+  44   2          SCL = 0;
+  45   2          SDA = (dat & (0x80 >> i))?1:0;
+  46   2          SCL = 1;
+  47   2        }
+  48   1      }
+  49          void send_cmd(unsigned char cmd){
+  50   1        unsigned char b_h = cmd & 0xF0;
+  51   1        unsigned char b_l = (cmd << 4) & 0xF0;
+  52   1        start_i2c();
+  53   1        write_i2c(address_slave);
+  54   1        ack();
+C51 COMPILER V9.60.7.0   I2C                                                               08/07/2024 02:35:16 PAGE 2   
+
+  55   1        write_i2c(b_h|0x0C);
+  56   1        ack();
+  57   1        delay_1ms(1);
+  58   1        write_i2c(b_h|0x08);
+  59   1        ack();
+  60   1        delay_1ms(1);
+  61   1        write_i2c(b_l|0x0C);
+  62   1        ack();
+  63   1        delay_1ms(1);
+  64   1        write_i2c(b_l|0x08);
+  65   1        ack();
+  66   1        delay_1ms(1);
+  67   1        stop_i2c();
+  68   1      }
+  69          void send_data(unsigned char dat){
+  70   1        unsigned char b_h = dat&0xF0;
+  71   1        unsigned char b_l = (dat<<4) & 0xF0;
+  72   1        start_i2c();
+  73   1        write_i2c(address_slave);
+  74   1        ack();
+  75   1        write_i2c(b_h|0x0D);
+  76   1        ack();
+  77   1        delay_1ms(1);
+  78   1        write_i2c(b_h|0x09);
+  79   1        ack();
+  80   1        delay_1ms(1);
+  81   1        write_i2c(b_l|0x0D);
+  82   1        ack();
+  83   1        delay_1ms(1);
+  84   1        write_i2c(b_l|0x09);
+  85   1        ack();
+  86   1        delay_1ms(1);
+  87   1        stop_i2c();
+  88   1      }
+  89          void send_string(unsigned char *p){
+  90   1        while(*p != '\0'){
+  91   2          send_data(*p++);
+  92   2        }
+  93   1      }
+  94          void lcd_col_row(int col, int row){
+  95   1        int p_address;
+  96   1        if(row==0){
+  97   2          p_address = 0x80 + col;
+  98   2        }
+  99   1        else{
+ 100   2          p_address = 0xC0 + col;
+ 101   2        }
+ 102   1        send_cmd(p_address);
+ 103   1      }
+ 104          void lcd_init()
+ 105          {
+ 106   1        send_cmd(0x02);
+ 107   1        send_cmd(0x28);
+ 108   1        send_cmd(0x0C);
+ 109   1        send_cmd(0x06);
+ 110   1        send_cmd(0x01);
+ 111   1      }
+ 112          void send_number(int number){
+ 113   1        if(number <= 9){
+ 114   2          send_data(number+48);
+ 115   2        }
+ 116   1        if(number > 9 && number <100 ){
+C51 COMPILER V9.60.7.0   I2C                                                               08/07/2024 02:35:16 PAGE 3   
+
+ 117   2          send_data(number/10+48);
+ 118   2          send_data(number%10+48);
+ 119   2        }
+ 120   1        if(number >= 100 && number < 1000){
+ 121   2          send_data(number/100+48);
+ 122   2          send_data(number/10%10+48);
+ 123   2          send_data(number%10+48);
+ 124   2        }
+ 125   1          if(number >= 1000 && number < 10000){
+ 126   2          send_data(number/1000+48);
+ 127   2          send_data(number/100%10+48);
+ 128   2          send_data(number/10%10+48);
+ 129   2          send_data(number%10+48);
+ 130   2       }
+ 131   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    510    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
